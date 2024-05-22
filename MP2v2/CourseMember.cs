@@ -25,10 +25,19 @@ namespace MP2v2
 
         }
 
-        public void RemoveMemberCourse(Member member)
+        public void RemoveMemberCourse()
         {
-            Member.RemoveMemberFromCourse(this);
-            Course.RemoveCourseFromMember(this);
+            if (Member != null)
+            {
+                Member.RemoveMemberFromCourse(this);
+                Member = null;
+            }
+
+            if (Course != null)
+            {
+                Course.RemoveCourseFromMember(this);
+                Course = null;
+            }
         }
     }
 }

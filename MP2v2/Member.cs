@@ -17,6 +17,7 @@ namespace MP2v2
             Surname = surname;
         }
 
+        //MP2 asocjacja zwykła/Asocjacja z atrybutem
         public void AddMemberToCourse(CourseMember courseMember)
         {
             if (!MemberCourses.Contains(courseMember))
@@ -24,16 +25,19 @@ namespace MP2v2
                 MemberCourses.Add(courseMember);
 
                 courseMember.Member = this;
+
             }
         }
 
+        //MP2 asocjacja zwykła/Asocjacja z atrybutem
         public void RemoveMemberFromCourse(CourseMember courseMember)
         {
             if (MemberCourses.Contains(courseMember))
             {
                 MemberCourses.Remove(courseMember);
 
-                courseMember.Member = null;
+                courseMember.RemoveMemberCourse();
+
             }
         }
     }

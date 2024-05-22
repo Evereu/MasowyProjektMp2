@@ -96,7 +96,7 @@ namespace MP2v2
             {
                 memberCourses.Remove(courseMember);
 
-                courseMember.Course = null;
+                courseMember.RemoveMemberCourse();
             }
         }
     }
