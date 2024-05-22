@@ -10,8 +10,6 @@ namespace MP2v2
     public class Course
     {
 
-        //whole
-
         public int CourseId { get; set; }
         private string Title { get; set; }
 
@@ -29,11 +27,39 @@ namespace MP2v2
         private static HashSet<Video> AllVideos = new HashSet<Video>(); //MP2 kopozycja
 
 
+        //MP2 zwykła asocjacja
+        public List<Category> Categories = new List<Category>();
+
+
         public Course(int courseId, string title) 
         { 
             CourseId = courseId;
             Title = title;
         }
+
+
+        //MP2 zwykła asocjacja
+        public void AddCategory(Category category)
+        {
+            if (!Categories.Contains(category))
+            {
+                Categories.Add(category);
+
+                //Połączenie zwrotne
+                category.AddCourseToCategory(this);
+            }
+        }
+        //MP2 zwykła asocjacja
+        public void RemoveCategory(Category category)
+        {
+            if (Categories.Contains(category))
+            {
+                Categories.Remove(category);
+
+                category.RemoveCourseFromCategory(this);
+            }
+        }
+
 
         public void AddVideoPart(Video video)   //MP2 kopozycja
         {
@@ -64,23 +90,23 @@ namespace MP2v2
         }
 
 
-        public void AddCourseToMember(CourseMember member) //MP2 asocjacja zwykła/Asocjacja z atrybutem
+        public void AddCourseToMember(CourseMember courseMember) //MP2 asocjacja zwykła/Asocjacja z atrybutem
         {
-            if (!memberCourses.Contains(member))
+            if (!memberCourses.Contains(courseMember))
             {
-                memberCourses.Add(member);
+                memberCourses.Add(courseMember);
 
-                member.Course = this;
+                courseMember.Course = this;
             }
         }
 
-        public void RemoveCourseFromMember(CourseMember member) //MP2 asocjacja zwykła/Asocjacja z atrybutem
+        public void RemoveCourseFromMember(CourseMember courseMember) //MP2 asocjacja zwykła/Asocjacja z atrybutem
         {
-            if (memberCourses.Contains(member))
+            if (memberCourses.Contains(courseMember))
             {
-                memberCourses.Remove(member);
+                memberCourses.Remove(courseMember);
 
-                member.Course = null;
+                courseMember.Course = null;
             }
         }
     }

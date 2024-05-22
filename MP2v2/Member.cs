@@ -16,35 +16,24 @@ namespace MP2v2
             this.name = name;
         }
 
-
-        public void AddCourse(Course course, DateTime enrollmentDate, DateTime? completionDate = null)
+        
+        public void AddMemberToCourse(CourseMember courseMember)
         {
-            var courseMember = new CourseMember(this, course, enrollmentDate, completionDate);
             if (!memberCourses.Contains(courseMember))
             {
                 memberCourses.Add(courseMember);
-                course.AddCourseToMember(courseMember);
+
+                courseMember.Member = this;
             }
         }
 
-
-        public void AddMemberToCourse(CourseMember member) //MP2 asocjacja zwykła/Asocjacja z atrybutem
+        public void RemoveMemberFromCourse(CourseMember courseMember)
         {
-            if (!memberCourses.Contains(member))
+            if (memberCourses.Contains(courseMember))
             {
-                memberCourses.Add(member);
+                memberCourses.Remove(courseMember);
 
-                member.Member = this;
-            }
-        }
-
-        public void RemoveMemberFromCourse(CourseMember member) 
-        {
-            if (memberCourses.Contains(member))
-            {
-                memberCourses.Remove(member);
-
-                member.Member = null;
+                courseMember.Member = null;
             }
         }
 

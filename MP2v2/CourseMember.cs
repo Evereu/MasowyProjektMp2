@@ -19,9 +19,17 @@ namespace MP2v2
             Course = course;
             EnrollmentDate = enrollmentDate;    
             CompletionDate = completionDate;
+
+            member.AddMemberToCourse(this);
+            course.AddCourseToMember(this);
+
         }
 
-
+        public void RemoveMemberCourse(Member member)
+        {
+            Member.RemoveMemberFromCourse(this);
+            Course.RemoveCourseFromMember(this);
+        }
 
 
     }
