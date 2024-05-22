@@ -8,7 +8,6 @@ namespace MP2v2
 {
     public class Category
     {
-
         public string Name { get; set; }
 
         public Course Course { get; set; }
@@ -34,6 +33,5 @@ namespace MP2v2
 
             course.RemoveCategory(this);
         }
-
     }
 }

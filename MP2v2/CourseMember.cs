@@ -7,8 +7,8 @@ namespace MP2v2
 
         //wiele
 
-        public Member Member { get; set;}
-        public Course Course { get; set;}
+        public Member? Member { get; set;}
+        public Course? Course { get; set;}
         public DateTime EnrollmentDate { get; set;}
         public DateTime? CompletionDate { get; set;}
 
@@ -30,7 +30,5 @@ namespace MP2v2
             Member.RemoveMemberFromCourse(this);
             Course.RemoveCourseFromMember(this);
         }
-
-
     }
 }

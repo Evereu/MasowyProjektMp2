@@ -24,6 +24,7 @@ namespace MP2v2
             Course = course;
         }
 
+        //MP2 kompozycja
         public static Video createVideo(string name, Course course)
         {
             if(course == null)

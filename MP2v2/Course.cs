@@ -10,25 +10,22 @@ namespace MP2v2
     public class Course
     {
 
+        //Aktor
+
         public int CourseId { get; set; }
         private string Title { get; set; }
 
-
         private List<CourseMember> memberCourses = new List<CourseMember>(); //MP2 asocjacja zwykła/Asocjacja z atrybutem
-
-
-        //MP2 Asocjacja kwalfikowana lista do informacji zwrotnej
-        public List<Creator> CreatorsQualif = new List<Creator>();
-
-
+      
         private List<Video> VideosParts = new List<Video>(); //MP2 kopozycja
+        
+        private static HashSet<Video> AllVideos = new HashSet<Video>(); //MP2 kopozycja  zakazanie współdzielenia części. MP2 kompozycja
 
-        //zakazanie współdzielenia części. MP2 kompozycja
-        private static HashSet<Video> AllVideos = new HashSet<Video>(); //MP2 kopozycja
+        public List<Category> Categories = new List<Category>(); //MP2 zwykła asocjacja
 
 
-        //MP2 zwykła asocjacja
-        public List<Category> Categories = new List<Category>();
+        //MP2 asocjacja kwalifikowana identyfikator, kurs nullowalne znakiem zapytania bo 0, 1
+        private Dictionary<int, Creator?> CreatorsCourseQualif = new Dictionary<int, Creator?>();
 
 
         public Course(int courseId, string title) 
@@ -38,8 +35,43 @@ namespace MP2v2
         }
 
 
-        //MP2 zwykła asocjacja
-        public void AddCategory(Category category)
+        //MP2 Asocjacja kwalifikowana
+        //W creatorze przechowujemy jego kursy przez referencje 
+        public void AddCourseToCreatorQualif(Creator creator)
+        {
+            if (!CreatorsCourseQualif.ContainsKey(creator.CreatorId))
+            {
+                CreatorsCourseQualif.Add(creator.CreatorId, creator);
+
+                //MP2 Informacja zwrotna, asocjacja kwalifikowana
+                creator.CourseQualif.Add(this);
+            }
+        }
+
+        //MP2 Asocjacja kwalifikowana przez referencje 
+        public void RemoveCourseFromCreatorQualif(Creator creator)
+        {
+            if (CreatorsCourseQualif.ContainsKey(creator.CreatorId))
+            {
+                CreatorsCourseQualif.Remove(creator.CreatorId);
+
+                //MP2 usuwanie informacji zwrotej, asocjacja kwalifikowana
+                creator.CourseQualif.Remove(this);
+            }
+        }
+
+        //MP2 Asocjacja kwalifikowana
+        public Creator showCourseQualif(int id)
+        {
+            if (!CreatorsCourseQualif.ContainsKey(id))
+            {
+                throw new Exception("Brak odpowiadającego kursu");
+            }
+            return CreatorsCourseQualif[id];
+        }
+
+
+        public void AddCategory(Category category) //MP2 zwykła asocjacja
         {
             if (!Categories.Contains(category))
             {
@@ -49,13 +81,14 @@ namespace MP2v2
                 category.AddCourseToCategory(this);
             }
         }
-        //MP2 zwykła asocjacja
-        public void RemoveCategory(Category category)
+      
+        public void RemoveCategory(Category category)   //MP2 zwykła asocjacja
         {
             if (Categories.Contains(category))
             {
                 Categories.Remove(category);
 
+                //Połączenie zwrotne
                 category.RemoveCourseFromCategory(this);
             }
         }
@@ -70,9 +103,7 @@ namespace MP2v2
                     throw new Exception("Takie wideo w kursie już istnieje");
                 }
             }
-
             VideosParts.Add(video);
-
             AllVideos.Add(video);
         }
 
