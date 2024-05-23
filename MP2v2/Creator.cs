@@ -5,7 +5,7 @@
         public int CreatorId { get; set; }
         public string Name { get; set; }
 
-        public string Surname { get; set; } 
+        public string Surname { get; set; }
 
         //MP2 asocjacja kwalifikowana identyfikator, kurs nullowalne znakiem zapytania bo 0, 1
         private Dictionary<int, Course?> CreatorsCourseQualif = new Dictionary<int, Course?>();

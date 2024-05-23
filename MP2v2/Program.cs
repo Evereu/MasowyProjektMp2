@@ -29,7 +29,7 @@
             creator1.AddCourseToCreatorQualif(course1);
             creator1.AddCourseToCreatorQualif(course2);
 
-           CourseMember courseMember = new CourseMember(member1, course1, startDate);
+            CourseMember courseMember = new CourseMember(member1, course1, startDate);
 
             member1.RemoveMemberFromCourse(courseMember);
 

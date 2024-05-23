@@ -1,31 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MP2v2
+﻿namespace MP2v2
 {
     public class Course
     {
-
-
         public int CourseId { get; set; }
         private string Title { get; set; }
 
         private List<CourseMember> memberCourses = new List<CourseMember>(); //MP2 asocjacja zwykła/Asocjacja z atrybutem
-      
+
         public List<Creator> CreatorsQualif = new List<Creator>();   //MP2 Asocjacja kwalfikowana lista do informacji zwrotnej
 
         private List<Video> VideosParts = new List<Video>(); //MP2 kopozycja
-        
+
         private static HashSet<Video> AllVideos = new HashSet<Video>(); //MP2 kopozycja  zakazanie współdzielenia części. MP2 kompozycja
 
         public List<Category> Categories = new List<Category>(); //MP2 zwykła asocjacja
 
-        public Course(int courseId, string title) 
-        { 
+        public Course(int courseId, string title)
+        {
             CourseId = courseId;
             Title = title;
         }
@@ -40,7 +31,7 @@ namespace MP2v2
                 category.AddCourseToCategory(this);
             }
         }
-      
+
         public void RemoveCategory(Category category)   //MP2 zwykła asocjacja
         {
             if (Categories.Contains(category))

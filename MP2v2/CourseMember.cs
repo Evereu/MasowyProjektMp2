@@ -6,13 +6,13 @@ namespace MP2v2
     {
 
         //wiele
-
+        //MP2 asocjacja zwykła/Asocjacja z atrybutem
         public Member? Member { get; set;}
         public Course? Course { get; set;}
         public DateTime EnrollmentDate { get; set;}
         public DateTime? CompletionDate { get; set;}
 
-
+        //MP2 asocjacja zwykła/Asocjacja z atrybutem
         public CourseMember(Member member, Course course, DateTime enrollmentDate, DateTime? completionDate = null)
         {
             Member = member;
@@ -24,7 +24,7 @@ namespace MP2v2
             course.AddCourseToMember(this);
 
         }
-
+        //MP2 asocjacja zwykła/Asocjacja z atrybutem
         public void RemoveMemberCourse()
         {
             if (Member != null)

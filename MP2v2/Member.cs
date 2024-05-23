@@ -6,8 +6,8 @@ namespace MP2v2
     {
         public string Name { get; set; }
 
-        public string Surname { get; set; } 
-            
+        public string Surname { get; set; }
+
         //MP2 asocjacja zwykła/Asocjacja z atrybutem
         private List<CourseMember> MemberCourses = new List<CourseMember>();
 
