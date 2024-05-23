@@ -2,9 +2,9 @@
 {
     public class Category
     {
-        public string Name { get; set; }
+        private string Name { get; set; }
 
-        public Course Course { get; set; }
+        private Course Course { get; set; }
 
 
         public Category(string name)

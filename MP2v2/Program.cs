@@ -31,6 +31,7 @@
 
             CourseMember courseMember = new CourseMember(member1, course1, startDate);
 
+
             member1.RemoveMemberFromCourse(courseMember);
 
 

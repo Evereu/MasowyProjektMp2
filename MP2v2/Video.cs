@@ -14,7 +14,7 @@ namespace MP2v2
 
         private string Name { get; set; }
 
-        public Course Course { get; set; }  
+        private Course Course { get; set; }  
 
         //Konstruktor klasy. Zwróćmy uwagę na to, że jest prywatny. Dzięki temu tylko metody z tej samej klasy mogą tworzyć jej instancje.
 
